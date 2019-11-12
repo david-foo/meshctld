@@ -168,3 +168,6 @@ cscope.out
 cscope.po.out
 
 .vscode/*
+mesh/bluetooth-meshd.service
+mesh/meshd
+mesh/meshd.sh
