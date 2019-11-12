@@ -201,7 +201,7 @@ static bool send_cmd(uint16_t target, uint8_t *buf, uint16_t len)
 	ttl = node_get_default_ttl(node);
 
 	return net_access_layer_send(ttl, node_get_primary(node),
-					target, level_app_idx, buf, len);
+					target, 1, buf, len);
 }
 
 static void cmd_level_get(int argc, char *argv[])
@@ -413,12 +413,12 @@ static const struct bt_shell_menu level_menu = {
 	},
 };
 
-static struct mesh_model_ops client_cbs = {
-	client_msg_recvd,
-	client_bind,
-	NULL,
-	NULL
-};
+//static struct mesh_model_ops client_cbs = {
+//	client_msg_recvd,
+//	client_bind,
+//	NULL,
+//	NULL
+//};
 
 static bool client_level_status_msg_recvd(uint16_t src, uint16_t dst,
 						uint8_t *data, uint16_t len, void *user_data)
@@ -452,9 +452,9 @@ static struct mesh_opcode_ops client_level_status_cbs = {
 
 bool level_client_init(uint8_t ele)
 {
-	if (!node_local_model_register(ele, GENERIC_LEVEL_CLIENT_MODEL_ID,
-					&client_cbs, NULL))
-		return false;
+//	if (!node_local_model_register(ele, GENERIC_LEVEL_CLIENT_MODEL_ID,
+//					&client_cbs, NULL))
+//		return false;
 
 	if(!node_remote_opcode_register("Generic LEVEL Status", OP_GENERIC_LEVEL_STATUS,
 					&client_level_status_cbs, NULL))
