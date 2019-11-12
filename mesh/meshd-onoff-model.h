@@ -1,5 +1,5 @@
-#ifndef _MESHD_ONOFF_MODEL_H
-#define _MESHD_ONOFF_MODEL_H
+#ifndef _MESHD_LEVEL_MODEL_H
+#define _MESHD_LEVEL_MODEL_H
 
 #define onoff_emit_new_state_with_remaining(src, dst, state, remaining_time) \
 				model_emit_status(MESHCTLD_OBJECT_PATH_MODEL_ONOFF, \

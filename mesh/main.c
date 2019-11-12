@@ -58,6 +58,7 @@
 #include "mesh/prov-db.h"
 #include "mesh/config-model.h"
 #include "mesh/onoff-model.h"
+#include "mesh/level-model.h"
 
 #include "mesh/dbus-server.h"
 #include "mesh/meshd-interface-sample.h"
@@ -65,6 +66,7 @@
 #include "mesh/meshd-shell.h"
 #include "mesh/meshd-config.h"
 #include "mesh/meshd-onoff-model.h"
+#include "mesh/meshd-level-model.h"
 #include "mesh/foundation-models.h"
 
 /* String display constants */
@@ -2109,6 +2111,10 @@ int main(int argc, char *argv[])
 	if (!onoff_client_init(PRIMARY_ELEMENT_IDX))
 		g_printerr("Failed to initialize mesh generic On/Off client\n");
 
+	if (!level_client_init(PRIMARY_ELEMENT_IDX))
+		g_printerr("Failed to initialize mesh generic Level client\n");
+
+
 	if(!heartbeat_init()) {
 		g_printerr("Failed to initialize mesh heartbeat\n");
 	}
@@ -2144,6 +2150,12 @@ int main(int argc, char *argv[])
 	}
 
 	if(meshd_onoff_register() < 0) {
+		g_printerr("D-bus Onoff object register failed\n");
+		status = EXIT_FAILURE;
+		goto quit;
+	}
+
+	if(meshd_level_register() < 0) {
 		g_printerr("D-bus Onoff object register failed\n");
 		status = EXIT_FAILURE;
 		goto quit;

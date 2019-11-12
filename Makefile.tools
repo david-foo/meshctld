@@ -29,6 +29,8 @@ mesh_meshctl_SOURCES = mesh/main.c \
 				mesh/config-model.h mesh/config-client.c \
 				mesh/config-server.c \
 				mesh/onoff-model.h mesh/onoff-model.c \
+				mesh/level-model.h mesh/level-model.c \
+				mesh/meshd-level-model.h mesh/meshd-level-model.c \
 				mesh/dbus-server.c \
 				mesh/meshd-interface-sample.c \
 				mesh/meshd-prov.c \
