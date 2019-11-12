@@ -406,8 +406,8 @@ static const struct bt_shell_menu level_menu = {
 	.desc = "level Model Submenu",
 	.entries = {
 	{"get",		"<ele_addr>",								cmd_level_get,			"Get LEVEL status"},
-	{"set",		"<ele_addr> <level> <time> <delay>",		cmd_level_set,			"Set LEVEL status"},
-	{"delta",		"<ele_addr> <delta> <time> <delay>",		cmd_delta_set,			"Set DELTA status"},
+	{"set",		"<ele_addr> <level> [time] [delay]",		cmd_level_set,			"Set LEVEL status"},
+	{"delta",		"<ele_addr> <delta> [time] [delay]",		cmd_delta_set,			"Set DELTA status"},
 	{"move",		"<ele_addr> <move> <time> <delay>",		cmd_move_set,			"Set MOVE status"},
 	{}
 	},
