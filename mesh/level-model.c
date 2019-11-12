@@ -182,7 +182,7 @@ static uint32_t read_input_parameters(int argc, char *argv[])
 
 	for (i = 0; i < sizeof(parms)/sizeof(parms[0]) && i < (unsigned) argc;
 									i++) {
-		sscanf(argv[i], "%x", &parms[i]);
+		sscanf(argv[i], "%d", &parms[i]);
 		if (parms[i] == 0xffffffff)
 			break;
 	}
@@ -407,8 +407,8 @@ static const struct bt_shell_menu level_menu = {
 	.entries = {
 	{"get",		"<ele_addr>",								cmd_level_get,			"Get LEVEL status"},
 	{"set",		"<ele_addr> <level> <time> <delay>",		cmd_level_set,			"Set LEVEL status"},
-	{"delta"		"<ele_addr> <delta> <time> <delay>",		cmd_delta_set,			"Set DELTA status"},
-	{"move"		"<ele_addr> <move> <time> <delay>",		cmd_move_set,			"Set MOVE status"},
+	{"delta",		"<ele_addr> <delta> <time> <delay>",		cmd_delta_set,			"Set DELTA status"},
+	{"move",		"<ele_addr> <move> <time> <delay>",		cmd_move_set,			"Set MOVE status"},
 	{}
 	},
 };

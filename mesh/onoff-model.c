@@ -287,12 +287,12 @@ static const struct bt_shell_menu onoff_menu = {
 	{} },
 };
 
-static struct mesh_model_ops client_cbs = {
-	client_msg_recvd,
-	client_bind,
-	NULL,
-	NULL
-};
+//static struct mesh_model_ops client_cbs = {
+//	client_msg_recvd,
+//	client_bind,
+//	NULL,
+//	NULL
+//};
 
 static bool client_onoff_status_msg_recvd(uint16_t src, uint16_t dst,
  						uint8_t *data, uint16_t len, void *user_data)
@@ -329,9 +329,9 @@ static struct mesh_opcode_ops client_onoff_status_cbs = {
 
 bool onoff_client_init(uint8_t ele)
 {
-	if (!node_local_model_register(ele, GENERIC_ONOFF_CLIENT_MODEL_ID,
-					&client_cbs, NULL))
-		return false;
+	//if (!node_local_model_register(ele, GENERIC_ONOFF_CLIENT_MODEL_ID,
+	//				&client_cbs, NULL))
+	//	return false;
 
 	if(!node_remote_opcode_register("Generic OnOff Status", OP_GENERIC_ONOFF_STATUS,
 					&client_onoff_status_cbs, NULL))
