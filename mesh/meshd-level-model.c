@@ -64,7 +64,7 @@ static DBusMessage *exec_level_get(DBusConnection *conn,
 		dbus_message_get_member(msg),
 		addr);
 
-	error = bt_shell_manual_input_fmt("level.get %4.4x",
+	error = bt_shell_manual_input_fmt("level.get %d",
 						addr);
 
 	reply = dbus_message_new_method_return(msg);
@@ -107,28 +107,28 @@ static DBusMessage *exec_level_set(DBusConnection *conn,
 			} else if(!strcmp(key, "state")) {
 				state = int_value & 0xFFFF;
 			} else if(!strcmp(key, "time")) {
-				state = int_value & 0xFFFF;
+				time = int_value & 0xFFFF;
 			} else if(!strcmp(key, "delay")) {
-				state = int_value & 0xFFFF;
+				delay = int_value & 0xFFFF;
 			}
 		}
 		dbus_message_iter_next(&dict);
 	}
 
 	bt_shell_printf("[dbus][%s][%s] %s.%s"
-		"(addr = %4.4x, state = %x)\n",
+		"(addr = %4.4x, state = %d, time = %d, delay = %d)\n",
 		dbus_message_get_destination(msg),
 		dbus_message_get_path(msg),
 		dbus_message_get_interface(msg),
 		dbus_message_get_member(msg),
-		addr, state);
+		addr, state, time ,delay);
 
-	if (array_len >= 2) {
-		error = bt_shell_manual_input_fmt("level.set %4.4x %x",
+	if (array_len > 2) {
+		error = bt_shell_manual_input_fmt("level.set %d %d %d %d",
 						addr, state, time, delay);
 	}
 	else {
-		error = bt_shell_manual_input_fmt("level.set %4.4x %x",
+		error = bt_shell_manual_input_fmt("level.set %d %d",
 						addr, state);
 	}
 
@@ -172,28 +172,28 @@ static DBusMessage *exec_delta_set(DBusConnection *conn,
 			} else if(!strcmp(key, "state")) {
 				state = int_value & 0xFFFF;
 			} else if(!strcmp(key, "time")) {
-				state = int_value & 0xFFFF;
+				time = int_value & 0xFFFF;
 			} else if(!strcmp(key, "delay")) {
-				state = int_value & 0xFFFF;
+				delay = int_value & 0xFFFF;
 			}
 		}
 		dbus_message_iter_next(&dict);
 	}
 
 	bt_shell_printf("[dbus][%s][%s] %s.%s"
-		"(addr = %4.4x, state = %x)\n",
+		"(addr = %4.4x, state = %d, time = %d, delay = %d)\n",
 		dbus_message_get_destination(msg),
 		dbus_message_get_path(msg),
 		dbus_message_get_interface(msg),
 		dbus_message_get_member(msg),
-		addr, state);
+		addr, state, time ,delay);
 
-	if (array_len >= 2) {
-		error = bt_shell_manual_input_fmt("level.set %4.4x %x",
+	if (array_len > 2) {
+		error = bt_shell_manual_input_fmt("level.delta %d %d %d %d",
 						addr, state, time, delay);
 	}
 	else {
-		error = bt_shell_manual_input_fmt("level.set %4.4x %x",
+		error = bt_shell_manual_input_fmt("level.delta %d %d",
 						addr, state);
 	}
 
@@ -237,29 +237,27 @@ static DBusMessage *exec_move_set(DBusConnection *conn,
 			} else if(!strcmp(key, "state")) {
 				state = int_value & 0xFFFF;
 			} else if(!strcmp(key, "time")) {
-				state = int_value & 0xFFFF;
+				time = int_value & 0xFFFF;
 			} else if(!strcmp(key, "delay")) {
-				state = int_value & 0xFFFF;
+				delay = int_value & 0xFFFF;
 			}
 		}
 		dbus_message_iter_next(&dict);
 	}
 
 	bt_shell_printf("[dbus][%s][%s] %s.%s"
-		"(addr = %4.4x, state = %x)\n",
+		"(addr = %4.4x, state = %d, time = %d, delay = %d)\n",
 		dbus_message_get_destination(msg),
 		dbus_message_get_path(msg),
 		dbus_message_get_interface(msg),
 		dbus_message_get_member(msg),
-		addr, state);
+		addr, state, time ,delay);
 
-	if (array_len >= 2) {
-		error = bt_shell_manual_input_fmt("level.set %4.4x %x",
+	if (array_len > 2) {
+		error = bt_shell_manual_input_fmt("level.move %d %d %d %d",
 						addr, state, time, delay);
-	}
-	else {
-		error = bt_shell_manual_input_fmt("level.set %4.4x %x",
-						addr, state);
+	} else {
+		return meshd_error_invalid_args(msg);
 	}
 
 	reply = dbus_message_new_method_return(msg);

@@ -126,7 +126,7 @@ static uint8_t time2tt(uint32_t timems)
 		resolution = 0x00;
 		steps = timems / 100;
 	}
-	bt_shell_printf("calculated steps=%d,resolution=%d\n", steps, resolution);
+	//bt_shell_printf("calculated steps=%d,resolution=%d\n", steps, resolution);
 	return ((resolution << 6) | steps);
 }
 
