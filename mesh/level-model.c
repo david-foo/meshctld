@@ -59,7 +59,7 @@ static int client_bind(uint16_t app_idx, int action)
 	return MESH_STATUS_SUCCESS;
 }
 
-static int print_remaining_time(uint8_t remaining_time)
+static int tt2time(uint8_t remaining_time)
 {
 	uint8_t step = (remaining_time & 0xc0) >> 6;
 	uint8_t count = remaining_time & 0x3f;
@@ -92,8 +92,8 @@ static int print_remaining_time(uint8_t remaining_time)
 		break;
 	}
 
-	bt_shell_printf("\n\t\tRemaining time: %d hrs %d mins %d secs %d"
-			" msecs\n", hours, minutes, secs, msecs);
+	//bt_shell_printf("\n\t\tRemaining time: %d hrs %d mins %d secs %d"
+	//		" msecs\n", hours, minutes, secs, msecs);
 
 	return hours * 3600000 + minutes * 60000 + secs * 1000 + msecs;
 }
@@ -436,7 +436,7 @@ static bool client_level_status_msg_recvd(uint16_t src, uint16_t dst,
 
 	if (len == 5) {
 		target_level = data[3]<<8 | data[2];
-		remaining_ms = print_remaining_time(data[4]);
+		remaining_ms = tt2time(data[4]);
 		bt_shell_printf(", target_level = %x, remaining_ms=%d", target_level, remaining_ms);
 		level_emit_new_state_with_remaining(src, dst, present_level, target_level, remaining_ms);
 	} else {
