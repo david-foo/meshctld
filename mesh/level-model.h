@@ -18,4 +18,4 @@
 #define OP_GENERIC_MOVE_SET				0x820b
 #define OP_GENERIC_MOVE_SET_UNACK		0x820c
 
-bool level_client_init(uint8_t ele);
+bool level_client_init(void);

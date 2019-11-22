@@ -68,6 +68,8 @@
 #include "mesh/meshd-onoff-model.h"
 #include "mesh/meshd-level-model.h"
 #include "mesh/foundation-models.h"
+#include "mesh/sensor-model.h"
+#include "mesh/meshd-sensor-model.h"
 
 /* String display constants */
 #define COLORED_NEW	COLOR_GREEN "NEW" COLOR_OFF
@@ -2108,16 +2110,19 @@ int main(int argc, char *argv[])
 	if (!config_server_init())
 		g_printerr("Failed to initialize mesh configuration server\n");
 
-	if (!onoff_client_init(PRIMARY_ELEMENT_IDX))
+	if (!onoff_client_init())
 		g_printerr("Failed to initialize mesh generic On/Off client\n");
 
-	if (!level_client_init(PRIMARY_ELEMENT_IDX))
+	if (!level_client_init())
 		g_printerr("Failed to initialize mesh generic Level client\n");
 
 
 	if(!heartbeat_init()) {
 		g_printerr("Failed to initialize mesh heartbeat\n");
 	}
+
+	if (!sensor_client_init())
+		g_printerr("Failed to initialize mesh Sensor client\n");
 
 	if (meshd_connect_dbus() < 0) {
 		g_printerr("Unable to get on meshd D-Bus\n");
@@ -2157,6 +2162,12 @@ int main(int argc, char *argv[])
 
 	if(meshd_level_register() < 0) {
 		g_printerr("D-bus Onoff object register failed\n");
+		status = EXIT_FAILURE;
+		goto quit;
+	}
+
+	if(meshd_sensor_register() < 0) {
+		g_printerr("D-bus Sensor object register failed\n");
 		status = EXIT_FAILURE;
 		goto quit;
 	}

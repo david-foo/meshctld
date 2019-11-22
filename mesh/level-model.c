@@ -35,6 +35,8 @@
 #include "mesh/meshd-shell.h"
 #include "mesh/meshd-model.h"
 #include "mesh/meshd-level-model.h"
+#include "mesh/cli-model.h"
+#include "mesh/model.h"
 
 static uint8_t trans_id;
 static uint16_t level_app_idx = APP_IDX_INVALID;
@@ -188,20 +190,6 @@ static uint32_t read_input_parameters(int argc, char *argv[])
 	}
 
 	return i;
-}
-
-static bool send_cmd(uint16_t target, uint8_t *buf, uint16_t len)
-{
-	struct mesh_node *node = node_get_local_node();
-	uint8_t ttl;
-
-	if(!node)
-		return false;
-
-	ttl = node_get_default_ttl(node);
-
-	return net_access_layer_send(ttl, node_get_primary(node),
-					target, 1, buf, len);
 }
 
 static void cmd_level_get(int argc, char *argv[])
@@ -446,18 +434,14 @@ static bool client_level_status_msg_recvd(uint16_t src, uint16_t dst,
 	return true;
 }
 
-static struct mesh_opcode_ops client_level_status_cbs = {
-	client_level_status_msg_recvd
+static struct mesh_opcode_op level_ops[] = {
+	{"level status", OP_GENERIC_LEVEL_STATUS, client_level_status_msg_recvd, NULL},
+	MESH_OPCODE_OP_END
 };
 
-bool level_client_init(uint8_t ele)
+bool level_client_init(void)
 {
-//	if (!node_local_model_register(ele, GENERIC_LEVEL_CLIENT_MODEL_ID,
-//					&client_cbs, NULL))
-//		return false;
-
-	if(!node_remote_opcode_register("Generic LEVEL Status", OP_GENERIC_LEVEL_STATUS,
-					&client_level_status_cbs, NULL))
+	if(!node_remote_opcode_register(level_ops))
 		return false;
 
 	bt_shell_add_submenu(&level_menu);

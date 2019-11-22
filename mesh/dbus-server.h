@@ -11,7 +11,7 @@
 #define MESHCTLD_OBJECT_PATH_MODEL "/org/embest/model"
 #define MESHCTLD_OBJECT_PATH_MODEL_ONOFF "/org/embest/model/onoff"
 #define MESHCTLD_OBJECT_PATH_MODEL_LEVEL "/org/embest/model/level"
-
+#define MESHCTLD_OBJECT_PATH_MODEL_SENSOR "/org/embest/model/sensor"
 
 #define MESHCTLD_SIGNAL_UNPROVISIONED_DEVICE_DISCOVERED  "unprovisioned_device_discovered"
 #define MESHCTLD_SIGNAL_PROVISIONING "provisioning"
