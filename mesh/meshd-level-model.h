@@ -4,13 +4,13 @@
 #define level_emit_new_state_with_remaining(src, dst, present_level, target_level, remaining_time) \
 				model_emit_status(MESHCTLD_OBJECT_PATH_MODEL_LEVEL, \
 					GENERIC_LEVEL_SERVER_MODEL_ID, src, dst, \
-					"present_level=%q,target_level=%q,remaining_time=%i", \
+					"present_level=%n,target_level=%n,remaining_time=%i", \
 					present_level, target_level, remaining_time)
 
 #define level_emit_new_state(src, dst, present_level) \
 				model_emit_status(MESHCTLD_OBJECT_PATH_MODEL_LEVEL, \
 					GENERIC_LEVEL_SERVER_MODEL_ID, src, dst, \
-					"present_level=%q", \
+					"present_level=%n", \
 					present_level)
 
 #define level_emit_cmd_failed(method, result, error, ...) \
