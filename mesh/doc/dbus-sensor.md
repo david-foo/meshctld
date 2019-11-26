@@ -60,8 +60,8 @@ Get the sensor data of a / all sensor properties.
 
 | Dict Key | Dict Variant Type | Description                                                             |
 | -------- | ----------------- | ----------------------------------------------------------------------- |
-| "object" | s                 | Object Path, will be 'org/embest/model/onoff'                           |
-| "mod_id" | q                 | Model Id, it will be '1000', Generic OnOff Server                       |
+| "object" | s                 | Object Path, will be 'org/embest/model/sensor'                           |
+| "mod_id" | q                 | Model Id, it will be '1100', Generic Sensor Server                       |
 | "src"    | q                 | The state from which element model, it is the unicast addr of the model |
 | "dst"    | q                 | The msg send to                                                         |
 | "name"   | s                 | status name, can be "sensor_desc" or "sensor"                           |
