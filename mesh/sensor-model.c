@@ -42,9 +42,11 @@ static void cmd_sensor_x_get(uint16_t opcode, const char* messge, int argc, char
 
 	switch (argc) {
 	case 3:
-		sscanf(argv[1], "%x", &prop_id);
+		sscanf(argv[1], "%x", &target);
+		sscanf(argv[2], "%x", &prop_id);
+		break;
 	case 2:
-		sscanf(argv[2], "%x", &target);
+		sscanf(argv[1], "%x", &target);
 		break;
 
 	default:
