@@ -230,7 +230,7 @@ static DBusMessage *exec_config_pub_set(DBusConnection *conn,
 		period_step = 0;
 	}
 
-	error = bt_shell_manual_input_fmt("config.pub_set %4.4x %4.4x %d %d %d %4.4x",
+	error = bt_shell_manual_input_fmt("config.pub_set %4.4x %4.4x %d %x %d %4.4x",
 						ele_addr, pub_addr, app_idx,
 						((period_step & 0x03) << 6) | (period_res & 0x3F),
 						((retransmit_count & 0x07) << 5) | (retransmit_steps & 0x1F),
